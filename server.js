@@ -1,10 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
 
 const app = express();
-const port = process.env.PORT||4000;
+const port = process.env.PORT || 4000;
+
+// Middleware para habilitar CORS
+app.use(cors());
 
 // Middleware para servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
