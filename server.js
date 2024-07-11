@@ -5,7 +5,7 @@ const cors = require('cors');
 const hotelRoutes = require('./routes/hotelRoutes');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 
 // Middleware para habilitar CORS
 app.use(cors());
