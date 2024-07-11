@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoteles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .hotel {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Hoteles</h1>
+    <div id="hoteles"></div>
+
+    <script>
+        async function fetchHoteles() {
+            try {
+                const response = await fetch('/api/hoteles');
+                const hoteles = await response.json();
+                const hotelesDiv = document.getElementById('hoteles');
+
+                hoteles.forEach(hotel => {
+                    const hotelDiv = document.createElement('div');
+                    hotelDiv.className = 'hotel';
+                    hotelDiv.innerHTML = `
+                        <h2>${hotel.tipo_alojamiento}</h2>
+                        <p>Ubicación: ${hotel.ubicacion}</p>
+                        <p>Disponibilidad: ${hotel.disponibilidad ? 'Disponible' : 'No Disponible'}</p>
+                        <p>Precio: $${hotel.precio}</p>
+                        <p>Datos: ${hotel.datos}</p>
+                        <p>Cochera: ${hotel.cochera ? 'Sí' : 'No'}</p>
+                        <p>Link a Booking: <a href="${hotel.link_booking}" target="_blank">Reservar</a></p>
+                        <p>Link a Maps: <a href="${hotel.link_maps}" target="_blank">Ubicación</a></p>
+                        <img src="${hotel.imagen_principal_1}" alt="Imagen 1" style="max-width: 200px;">
+                        <img src="${hotel.imagen_principal_2}" alt="Imagen 2" style="max-width: 200px;">
+                        <img src="${hotel.imagen_principal_3}" alt="Imagen 3" style="max-width: 200px;">
+                    `;
+                    hotelesDiv.appendChild(hotelDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching hoteles:', error);
+            }
+        }
+
+        fetchHoteles();
+    </script>
+</body>
+</html>
