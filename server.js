@@ -26,6 +26,24 @@ app.use(session({
     cookie: { secure: false } // En producción, asegúrate de cambiar secure a true
 }));
 
+// Ejemplo de manejo de ruta para verificar el estado de inicio de sesión
+app.get('/api/check-login', (req, res) => {
+    if (req.session.userId) {
+        // Si hay un usuario autenticado, devolver detalles del usuario o cualquier otro dato necesario
+        res.json({
+            loggedIn: true,
+            userId: req.session.userId
+            // Puedes agregar más información del usuario si es necesario
+        });
+    } else {
+        // Si no hay un usuario autenticado
+        res.json({
+            loggedIn: false
+        });
+    }
+});
+
+
 // Usar las rutas de autenticación
 app.use('/api', authRoutes);
 
@@ -37,7 +55,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
+}); 
