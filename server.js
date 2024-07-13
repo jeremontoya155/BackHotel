@@ -18,13 +18,15 @@ app.use(express.json());
 // Middleware para servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Middleware para sesiones
+
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret:process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // En producción, asegúrate de cambiar secure a true
+    cookie: { secure: true } // Asegúrate de que esto esté configurado en true para HTTPS
 }));
+
 
 // Ejemplo de manejo de ruta para verificar el estado de inicio de sesión
 app.get('/api/check-login', (req, res) => {
