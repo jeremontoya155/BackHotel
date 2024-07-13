@@ -1,36 +1,42 @@
-const pool = require('../db');
-const jwt = require('jsonwebtoken');
+const { Pool } = require('pg');
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
-const login = async (req, res) => {
-    const { email, password } = req.body;
+const loginUser = async (req, res) => {
+    const { username, password } = req.body;
     try {
-        const result = await pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password]);
+        const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
         if (result.rows.length > 0) {
             const user = result.rows[0];
-            const token = jwt.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            res.json({ token });
+            if (password === user.password) { // Comparación de contraseñas en texto plano
+                req.session.userId = user.id;
+                res.json({ message: 'Login successful' });
+            } else {
+                res.status(401).json({ message: 'Invalid credentials' });
+            }
         } else {
-            res.status(401).json({ message: 'Invalid email or password' });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error) {
-        console.error('Error fetching user from database:', error);
+        console.error('Error logging in user:', error);
         res.status(500).send('Server error');
     }
 };
 
-const register = async (req, res) => {
-    const { email, password, role } = req.body;
-    try {
-        const result = await pool.query('INSERT INTO users (email, password, role) VALUES ($1, $2, $3) RETURNING *', [email, password, role]);
-        const newUser = result.rows[0];
-        res.status(201).json(newUser);
-    } catch (error) {
-        console.error('Error inserting user into database:', error);
-        res.status(500).send('Server error');
-    }
+const logoutUser = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Could not log out');
+        }
+        res.json({ message: 'Logout successful' });
+    });
 };
 
 module.exports = {
-    login,
-    register
+    loginUser,
+    logoutUser
 };

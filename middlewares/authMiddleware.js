@@ -1,16 +1,12 @@
-const jwt = require('jsonwebtoken');
-
-const authenticateToken = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (token == null) return res.sendStatus(401);
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
+// middlewares/authMiddleware.js
+const authenticateSession = (req, res, next) => {
+    if (req.session.userId) {
         next();
-    });
+    } else {
+        res.status(401).send('No autorizado');
+    }
 };
 
 module.exports = {
-    authenticateToken
+    authenticateSession
 };

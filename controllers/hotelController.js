@@ -15,13 +15,12 @@ const getAllHoteles = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
-
 const createHotel = async (req, res) => {
-    const { tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, numero_telefono, imagen_principal_1, imagen_principal_2, imagen_principal_3 } = req.body;
+    const { tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, wsp, imagen_principal_1, imagen_principal_2, imagen_principal_3 } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO hoteles (tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, numero_telefono, imagen_principal_1, imagen_principal_2, imagen_principal_3) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
-            [tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, numero_telefono, imagen_principal_1, imagen_principal_2, imagen_principal_3]
+            'INSERT INTO hoteles (tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, wsp, imagen_principal_1, imagen_principal_2, imagen_principal_3) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
+            [tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, wsp, imagen_principal_1, imagen_principal_2, imagen_principal_3]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -30,13 +29,18 @@ const createHotel = async (req, res) => {
     }
 };
 
+
 const updateHotel = async (req, res) => {
     const { id } = req.params;
-    const { tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, numero_telefono, imagen_principal_1, imagen_principal_2, imagen_principal_3 } = req.body;
+    const { tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, wsp, imagen_principal_1, imagen_principal_2, imagen_principal_3 } = req.body;
     try {
+        // Transforma disponibilidad y cochera a booleanos si es necesario
+        const disponibilidadBoolean = disponibilidad === 'true';
+        const cocheraBoolean = cochera === 'true';
+
         const result = await pool.query(
-            'UPDATE hoteles SET tipo_alojamiento = $1, ubicacion = $2, disponibilidad = $3, precio = $4, datos = $5, cochera = $6, link_booking = $7, link_maps = $8, numero_telefono = $9, imagen_principal_1 = $10, imagen_principal_2 = $11, imagen_principal_3 = $12 WHERE id = $13 RETURNING *',
-            [tipo_alojamiento, ubicacion, disponibilidad, precio, datos, cochera, link_booking, link_maps, numero_telefono, imagen_principal_1, imagen_principal_2, imagen_principal_3, id]
+            'UPDATE hoteles SET tipo_alojamiento = $1, ubicacion = $2, disponibilidad = $3, precio = $4, datos = $5, cochera = $6, link_booking = $7, link_maps = $8, wsp = $9, imagen_principal_1 = $10, imagen_principal_2 = $11, imagen_principal_3 = $12 WHERE id = $13 RETURNING *',
+            [tipo_alojamiento, ubicacion, disponibilidadBoolean, precio, datos, cocheraBoolean, link_booking, link_maps, wsp, imagen_principal_1, imagen_principal_2, imagen_principal_3, id]
         );
         res.json(result.rows[0]);
     } catch (error) {
