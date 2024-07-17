@@ -1,9 +1,8 @@
-// middlewares/authMiddleware.js
 const authenticateSession = (req, res, next) => {
-    if (req.session.userId) {
+    if (req.session && req.session.userId) {
         next();
     } else {
-        res.status(401).send('No autorizado');
+        res.redirect('/login');
     }
 };
 
