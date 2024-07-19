@@ -65,6 +65,10 @@ app.get('/login', (req, res) => {
     res.render('login', { loggedIn: req.session.userId });
 });
 
+app.get('/logout', (req, res) => {
+    res.render('login');
+});
+
 // Redirigir a /admin y que el controlador maneje el renderizado
 app.get('/admin', authenticateSession, (req, res) => {
     res.redirect('/api/admin');

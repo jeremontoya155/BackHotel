@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const { loginUser, logoutUser } = require('../controllers/authController');
 
-router.post('/login', authController.loginUser);
-router.post('/logout', authController.logoutUser);
+// Ruta para iniciar sesión
+router.post('/login', loginUser);
+
+// Ruta para cerrar sesión
+router.get('/logout', logoutUser);
 
 module.exports = router;
