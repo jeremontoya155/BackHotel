@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrar Hoteles</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -20,112 +20,117 @@
         <% if (loggedIn) { %>
             <div class="form-box">
                 <h2>Agregar Nuevo Hotel</h2>
-                <form action="/api/hoteles" method="POST">
+                <form action="/api/hoteles" method="POST" class="flex flex-col gap-3">
                     <div class="form-group">
-                        <label for="nombre">Nombre:</label>
+                        <label for="nombre">Nombre</label>
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="tipo_alojamiento">Tipo de Alojamiento:</label>
+                        <label for="tipo_alojamiento">Tipo de Alojamiento</label>
                         <input type="text" id="tipo_alojamiento" name="tipo_alojamiento" required>
                     </div>
                     <div class="form-group">
-                        <label for="localidad">Localidad:</label>
+                        <label for="localidad">Localidad</label>
                         <input type="text" id="localidad" name="localidad" required>
                     </div>
                     <div class="form-group">
-                        <label for="disponibilidad">Disponibilidad:</label>
+                        <label for="disponibilidad">Disponibilidad</label>
                         <input type="checkbox" id="disponibilidad" name="disponibilidad">
                     </div>
                     <div class="form-group">
-                        <label for="precio">Precio:</label>
+                        <label for="precio">Precio</label>
                         <input type="number" id="precio" name="precio" required>
                     </div>
                     <div class="form-group">
-                        <label for="datos">Datos:</label>
+                        <label for="datos">Datos</label>
                         <textarea id="datos" name="datos" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="cochera">Cochera:</label>
+                        <label for="cochera">Cochera</label>
                         <input type="checkbox" id="cochera" name="cochera">
                     </div>
                     <div class="form-group">
-                        <label for="link_booking">Link de Booking:</label>
+                        <label for="link_booking">Link de Booking</label>
                         <input type="url" id="link_booking" name="link_booking" required>
                     </div>
                     <div class="form-group">
-                        <label for="link_maps">Link de Maps:</label>
+                        <label for="link_maps">Link de Maps</label>
                         <input type="url" id="link_maps" name="link_maps" required>
                     </div>
                     <div class="form-group">
-                        <label for="imagen_principal_1">Imagen Principal 1:</label>
+                        <label for="imagen_principal_1">Imagen Principal 1</label>
                         <input type="url" id="imagen_principal_1" name="imagen_principal_1" required>
                     </div>
                     <div class="form-group">
-                        <label for="imagen_principal_2">Imagen Principal 2:</label>
+                        <label for="imagen_principal_2">Imagen Principal 2</label>
                         <input type="url" id="imagen_principal_2" name="imagen_principal_2" required>
                     </div>
                     <div class="form-group">
-                        <label for="imagen_principal_3">Imagen Principal 3:</label>
+                        <label for="imagen_principal_3">Imagen Principal 3</label>
                         <input type="url" id="imagen_principal_3" name="imagen_principal_3" required>
                     </div>
                     <button type="submit" class="btn">Agregar Hotel</button>
                 </form>
             </div>
-
             <div class="hotels-list">
                 <h2>Lista de Hoteles</h2>
                 <ul>
                     <% hoteles.forEach(hotel => { %>
                         <li class="hotel-item">
                             <h3><%= hotel.nombre %></h3>
-                            <form action="/api/hoteles/<%= hotel.id %>?_method=PUT" method="POST">
+
+                            <img src="<%= hotel.imagen_principal_1 %>" width="250">
+                            <img src="<%= hotel.imagen_principal_2 %>" width="250">
+                            <img src="<%= hotel.imagen_principal_3 %>" width="250">
+
+                           <form action="/api/hoteles/<%= hotel.id %>?_method=PUT" method="POST" class="flex flex-col gap-3">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre:</label>
+                                    <label for="nombre">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" value="<%= hotel.nombre %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tipo_alojamiento">Tipo de Alojamiento:</label>
+                                    <label for="tipo_alojamiento">Tipo de Alojamiento</label>
                                     <input type="text" id="tipo_alojamiento" name="tipo_alojamiento" value="<%= hotel.tipo_alojamiento %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="localidad">Localidad:</label>
+                                    <label for="localidad">Localidad</label>
                                     <input type="text" id="localidad" name="localidad" value="<%= hotel.localidad %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="disponibilidad">Disponibilidad:</label>
+                                    <label for="disponibilidad">Disponibilidad</label>
                                     <input type="checkbox" id="disponibilidad" name="disponibilidad" <%= hotel.disponibilidad ? 'checked' : '' %>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="precio">Precio:</label>
+                                    <label for="precio">Precio</label>
                                     <input type="number" id="precio" name="precio" value="<%= hotel.precio %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="datos">Datos:</label>
+                                    <label for="datos">Datos</label>
                                     <textarea id="datos" name="datos" required><%= hotel.datos %></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cochera">Cochera:</label>
+                                    <label for="cochera">Cochera</label>
                                     <input type="checkbox" id="cochera" name="cochera" <%= hotel.cochera ? 'checked' : '' %>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="link_booking">Link de Booking:</label>
+                                    <label for="link_booking">Link de Booking</label>
                                     <input type="url" id="link_booking" name="link_booking" value="<%= hotel.link_booking %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="link_maps">Link de Maps:</label>
+                                    <label for="link_maps">Link de Maps</label>
                                     <input type="url" id="link_maps" name="link_maps" value="<%= hotel.link_maps %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="imagen_principal_1">Imagen Principal 1:</label>
+                                    <label for="imagen_principal_1">Imagen Principal 1</label>
                                     <input type="url" id="imagen_principal_1" name="imagen_principal_1" value="<%= hotel.imagen_principal_1 %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="imagen_principal_2">Imagen Principal 2:</label>
+                                    <label for="imagen_principal_2">Imagen Principal 2</label>
                                     <input type="url" id="imagen_principal_2" name="imagen_principal_2" value="<%= hotel.imagen_principal_2 %>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="imagen_principal_3">Imagen Principal 3:</label>
+                                    <label for="imagen_principal_3">Imagen Principal 3</label>
+                                    
                                     <input type="url" id="imagen_principal_3" name="imagen_principal_3" value="<%= hotel.imagen_principal_3 %>" required>
                                 </div>
                                 <button type="submit" class="btn">Editar</button>

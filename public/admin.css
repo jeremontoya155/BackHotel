@@ -1,0 +1,124 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2a2b38; /* Fondo oscuro */
+    color: #d3d3d3; /* Texto gris claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #1f2029; /* Fondo de la cabecera */
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: #f5f5f5; /* Texto blanco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+.header p {
+    margin: 10px 0 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background: #1f2029; /* Fondo del contenedor */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+h2 {
+    color: #ffeba7; /* Color del título */
+    text-align: center;
+}
+
+.form-box, .hotels-list {
+    background-color: #2a2b38; /* Fondo del formulario y lista */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    color: #f5f5f5; /* Color del texto del label */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="password"], input[type="number"], input[type="url"], textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #3b3c4d; /* Fondo de los campos de entrada */
+    color: #d3d3d3; /* Color del texto de los campos de entrada */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button.btn {
+    background-color: #ffeba7; /* Marrón claro para los botones */
+    color: #1f2029;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #1f2029;
+    color: #ffeba7;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+}
+
+button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hotel-item {
+    background: #3b3c4d; /* Fondo de los ítems de la lista */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-item h3 {
+    margin-top: 0;
+    color: #ffeba7; /* Color del título del hotel */
+}
+
+.hotel-item form {
+    margin-top: 10px;
+}
