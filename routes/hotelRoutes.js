@@ -5,6 +5,9 @@ const { authenticateSession } = require('../middlewares/authMiddleware');
 
 router.get('/hoteles', hotelController.getAllHoteles);
 
+// Ruta de búsqueda
+router.get('/hoteles/search', authenticateSession, hotelController.searchHoteles);
+
 // Rutas protegidas para CRUD de hoteles
 router.post('/hoteles', authenticateSession, hotelController.createHotel);
 router.put('/hoteles/:id', authenticateSession, hotelController.updateHotel);
