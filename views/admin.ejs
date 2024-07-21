@@ -38,6 +38,10 @@
                             <input type="checkbox" id="disponibilidad" name="disponibilidad">
                         </div>
                         <div class="form-group">
+                            <label for="pileta">Pileta</label>
+                            <input type="checkbox" id="pileta" name="pileta">
+                        </div>
+                        <div class="form-group">
                             <label for="precio">Precio</label>
                             <input type="number" id="precio" name="precio" required>
                         </div>
@@ -77,6 +81,10 @@
                         <div class="form-group">
                             <label for="huespedes">Cantidad de Personas</label>
                             <input type="number" id="huespedes" name="huespedes" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="banios">Baños</label>
+                            <input type="number" id="banios" name="banios" required>
                         </div>
                         <div class="form-group">
                             <label for="direccion">Dirección</label>
@@ -119,6 +127,10 @@
                                         <input type="checkbox" id="disponibilidad" name="disponibilidad" <%= hotel.disponibilidad ? 'checked' : '' %>>
                                     </div>
                                     <div class="form-group">
+                                        <label for="pileta">Pileta</label>
+                                        <input type="checkbox" id="pileta" name="pileta" <%= hotel.pileta ? 'checked' : '' %>>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="precio">Precio</label>
                                         <input type="number" id="precio" name="precio" value="<%= hotel.precio %>" required>
                                     </div>
@@ -158,6 +170,10 @@
                                     <div class="form-group">
                                         <label for="huespedes">Cantidad de Personas</label>
                                         <input type="number" id="huespedes" name="huespedes" value="<%= hotel.huespedes %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="banios">Baños</label>
+                                        <input type="number" id="banios" name="banios" value="<%= hotel.baños %>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="direccion">Dirección</label>
@@ -225,6 +241,10 @@
                                 <input type="checkbox" id="disponibilidad" name="disponibilidad" ${hotel.disponibilidad ? 'checked' : ''}>
                             </div>
                             <div class="form-group">
+                                <label for="pileta">Pileta</label>
+                                <input type="checkbox" id="pileta" name="pileta" ${hotel.pileta ? 'checked' : ''}>
+                            </div>
+                            <div class="form-group">
                                 <label for="precio">Precio</label>
                                 <input type="number" id="precio" name="precio" value="${hotel.precio}" required>
                             </div>
@@ -263,6 +283,10 @@
                             <div class="form-group">
                                 <label for="huespedes">Cantidad de Personas</label>
                                 <input type="number" id="huespedes" name="huespedes" value="${hotel.huespedes}" required>
+                            </div>  
+                            <div class="form-group">
+                                <label for="banios">Baños</label>
+                                <input type="number" id="banios" name="banios" value="${hotel.baños}" required>
                             </div>
                             <div class="form-group">
                                 <label for="direccion">Dirección</label>
