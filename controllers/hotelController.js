@@ -46,13 +46,13 @@ const renderAdminPage = async (req, res) => {
 };
 
 const createHotel = async (req, res) => {
-    const { nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta } = req.body;
+    const { nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta,imagen_principal_4, imagen_principal_5  } = req.body;
     try {
         const result = await pool.query(
-            `INSERT INTO hoteles (nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,$16,$17) 
+            `INSERT INTO hoteles (nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta,imagen_principal_4,imagen_principal_5  ) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,$16,$17,$18,$19) 
             RETURNING *`,
-            [nombre, tipo_alojamiento, localidad, disponibilidad === 'on', precio, datos, cochera === 'on', link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta]
+            [nombre, tipo_alojamiento, localidad, disponibilidad === 'on', precio, datos, cochera === 'on', link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta,imagen_principal_4, imagen_principal_5 ]
         );
         res.redirect('/api/admin?successMessage=Hotel creado exitosamente');
     } catch (error) {
@@ -63,14 +63,14 @@ const createHotel = async (req, res) => {
 
 const updateHotel = async (req, res) => {
     const { id } = req.params;
-    const { nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios, pileta } = req.body;
+    const { nombre, tipo_alojamiento, localidad, disponibilidad, precio, datos, cochera, link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios, pileta,imagen_principal_4,imagen_principal_5  } = req.body;
     try {
         const result = await pool.query(
             `UPDATE hoteles 
-            SET nombre = $1, tipo_alojamiento = $2, localidad = $3, disponibilidad = $4, precio = $5, datos = $6, cochera = $7, link_booking = $8, link_maps = $9, imagen_principal_1 = $10, imagen_principal_2 = $11, imagen_principal_3 = $12, calificacion = $13, huespedes = $14, direccion = $15 ,baños = $16,pileta = $17
-            WHERE id = $18 
+            SET nombre = $1, tipo_alojamiento = $2, localidad = $3, disponibilidad = $4, precio = $5, datos = $6, cochera = $7, link_booking = $8, link_maps = $9, imagen_principal_1 = $10, imagen_principal_2 = $11, imagen_principal_3 = $12, calificacion = $13, huespedes = $14, direccion = $15 ,baños = $16,pileta = $17,imagen_principal_4=$18,imagen_principal_5=$19  
+            WHERE id = $20 
             RETURNING *`,
-            [nombre, tipo_alojamiento, localidad, disponibilidad === 'on', precio, datos, cochera === 'on', link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta, id]
+            [nombre, tipo_alojamiento, localidad, disponibilidad === 'on', precio, datos, cochera === 'on', link_booking, link_maps, imagen_principal_1, imagen_principal_2, imagen_principal_3, calificacion, huespedes, direccion,banios,pileta,imagen_principal_4,imagen_principal_5,   id]
         );
         res.redirect('/api/admin?successMessage=Hotel actualizado exitosamente');
     } catch (error) {
