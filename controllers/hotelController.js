@@ -8,7 +8,7 @@ const pool = new Pool({
 
 const getAllHoteles = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM hoteles');
+        const result = await pool.query('SELECT * FROM hoteles ORDER BY nombre ');
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching data from database:', error);
