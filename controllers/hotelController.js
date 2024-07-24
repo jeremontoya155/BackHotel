@@ -8,13 +8,20 @@ const pool = new Pool({
 
 const getAllHoteles = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM hoteles ORDER BY nombre ');
+        const result = await pool.query(`
+            SELECT * 
+            FROM hoteles 
+            ORDER BY 
+                regexp_replace(nombre, '\\d+', '', 'g'), 
+                NULLIF(regexp_replace(nombre, '\\D', '', 'g'), '')::int
+        `);
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching data from database:', error);
         res.status(500).send('Server error');
     }
 };
+
 
 const searchHoteles = async (req, res) => {
     const { query } = req.query;
