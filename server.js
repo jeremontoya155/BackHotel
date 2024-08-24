@@ -14,6 +14,32 @@ const port = process.env.PORT || 8000;
 // Middleware para habilitar CORS
 app.use(cors());
 
+
+// Middleware para bloquear rutas específicas
+app.use((req, res, next) => {
+    const blockedPaths = [
+        '/wp-includes/pomo/wp-login.php',
+        '/wp-includes/fonts/wp-login.php',
+        '/wp-includes/customize/wp-login.php',
+        '/.tmb/wp-login.php',
+        '/.well-known/pki-validation/wp-login.php',
+        '/cgi-bin/wp-login.php',
+        '/images/wp-login.php',
+        '/wp-admin/css/wp-login.php',
+        '/wp-admin/images/wp-login.php',
+        '/wp-admin/',
+        '/wp-login.php'
+    ];
+
+    // Bloquea las rutas mencionadas
+    if (blockedPaths.includes(req.path) || req.path === '/wp-login.php') {
+        res.status(403).send('Access forbidden');
+    } else {
+        next();
+    }
+});
+
+
 // Middleware para parsear JSON y datos de formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
